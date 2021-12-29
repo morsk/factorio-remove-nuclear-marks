@@ -25,14 +25,19 @@ local function getClosestTileName(tiles, pos)
 end
 
 local function onSelection(data)
-    local hasMower = script.active_mods['Mower'] ~= nil
-    if hasMower and data.item ~= 'mower-mower' then
-        return
-    elseif not hasMower and data.item ~= 'rmnmks-remove-tool' then
+    local run = false
+    if script.active_mods['Mower'] ~= nil and data.item == 'mower-mower' then
+        run = true
+    elseif script.active_mods['Dectorio'] ~= nil and data.item == 'dect-lawnmower' then
+        run = true
+    else
+        run = data.item == 'rmnmks-remove-tool'
+    end
+    if not run then
         return
     end
     local plr = game.get_player(data.player_index)
-    if (not hasMower and not plr.force.technologies['atomic-bomb'].researched) then
+    if data.item == 'rmnmks-remove-tool' and not plr.force.technologies['atomic-bomb'].researched then
         return
     end
     data.surface.destroy_decoratives{area = data.area, name = 'nuclear-ground-patch'}

@@ -1,4 +1,4 @@
-if not mods['Mower'] then
+if not mods['Mower'] and not mods['Dectorio'] then
     data:extend{
         {
             type = 'custom-input',
