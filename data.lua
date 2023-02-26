@@ -1,3 +1,7 @@
+-- Copyright 2023 Sil3ntStorm https://github.com/Sil3ntStorm
+--
+-- Licensed under MS-RL, see https://opensource.org/licenses/MS-RL
+
 if not mods['Mower'] and not mods['Dectorio'] then
     data:extend{
         {

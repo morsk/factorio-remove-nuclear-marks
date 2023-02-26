@@ -1,0 +1,11 @@
+---------------------------------------------------------------------------------------------------
+Version: 0.3.1176
+Date: 2023-02-26
+
+  Features:
+    - If neither Mower or Dectorio mods are active there are now mod settings that can be
+      separately enabled. They are not present with either mod as these mods already present the
+      same functionality to a degree. These settings allow you to optionally:
+        - Remove dead biters and tree stomps
+        - Remove nasty biter goo they leave behind in their bases
+        - Remove all other decoratives (shrubbery, mud, rocky texture)

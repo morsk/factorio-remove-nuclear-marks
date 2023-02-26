@@ -1,4 +1,4 @@
--- Copyright 2021 Sil3ntStorm https://github.com/Sil3ntStorm
+-- Copyright 2023 Sil3ntStorm https://github.com/Sil3ntStorm
 --
 -- Licensed under MS-RL, see https://opensource.org/licenses/MS-RL
 
@@ -38,6 +38,11 @@ local nuclearEntities = {
     'nuclear-scorchmark',
     'medium-scorchmark-tintable',
     'small-scorchmark-tintable'
+}
+
+local biterDecoratives = {
+    'enemy-decal',
+    'enemy-decal-transparent'
 }
 
 local function isNuclearEntity(entityName)
@@ -107,6 +112,20 @@ local function onSelection(data)
     end
     if not run then
         return
+    end
+    if data.item == 'rmnmks-remove-tool' then
+        if settings.global['sil-rmnmks-clean-biter-goo'].value then
+            data.surface.destroy_decoratives{area = data.area, name = biterDecoratives}
+        end
+        if settings.global['sil-rmnmks-clean-corpses'].value then
+            local found = data.surface.find_entities_filtered{area = data.area, type = 'corpse'}
+            for _, entity in pairs(found) do
+                entity.destroy()
+            end
+        end
+        if settings.global['sil-rmnmks-clean-shrubbery'].value then
+            data.surface.destroy_decoratives{area = data.area, name = biterDecoratives, invert = true}
+        end
     end
     local plr = game.get_player(data.player_index)
     if data.item == 'rmnmks-remove-tool' and not plr.force.technologies['atomic-bomb'].researched then
