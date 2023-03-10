@@ -42,7 +42,10 @@ local nuclearEntities = {
 
 local biterDecoratives = {
     'enemy-decal',
-    'enemy-decal-transparent'
+    'enemy-decal-transparent',
+    'shroom-decal',
+    'worms-decal',
+    'lichen-decal'
 }
 
 local function isNuclearEntity(entityName)

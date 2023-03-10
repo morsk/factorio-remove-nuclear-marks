@@ -10,7 +10,6 @@ if not mods['Mower'] and not mods['Dectorio'] then
             key_sequence = 'CONTROL + ALT + X',
             action = 'spawn-item',
             item_to_spawn = 'rmnmks-remove-tool',
-            technology_to_unlock = 'atomic-bomb',
         },
         {
             type = 'selection-tool',
@@ -36,7 +35,6 @@ if not mods['Mower'] and not mods['Dectorio'] then
             associated_control_input = 'rmnmks-remove',
             action = 'spawn-item',
             item_to_spawn = 'rmnmks-remove-tool',
-            technology_to_unlock = 'atomic-bomb',
             icon =
             {
                 filename = '__remove-nuclear-marks__/graphics/icons/icon-crossed.png',
