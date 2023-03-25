@@ -130,10 +130,6 @@ local function onSelection(data)
             data.surface.destroy_decoratives{area = data.area, name = biterDecoratives, invert = true}
         end
     end
-    local plr = game.get_player(data.player_index)
-    if data.item == 'rmnmks-remove-tool' and not plr.force.technologies['atomic-bomb'].researched then
-        return
-    end
     data.surface.destroy_decoratives{area = data.area, name = 'nuclear-ground-patch'}
     local found = data.surface.find_tiles_filtered{area = data.area, name = nuclearTiles}
     if #found > 0 then
