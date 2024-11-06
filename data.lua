@@ -16,18 +16,22 @@ if not mods['Mower'] and not mods['Dectorio'] then
             name = 'rmnmks-remove-tool',
             icon = '__remove-nuclear-marks__/graphics/icons/icon-crossed.png',
             icon_size = 32,
-            flags = {'only-in-cursor', 'hidden', 'spawnable'},
+            flags = {'only-in-cursor', 'spawnable'},
             stack_size = 1,
             stackable = false,
             toggleable = false,
             show_in_library = false,
             subgroup = 'tool',
-            selection_mode = 'nothing',
-            selection_color = { r = 0.7, b = 0.7 },
-            selection_cursor_box_type = 'not-allowed',
-            alt_selection_mode = 'nothing',
-            alt_selection_color = { r = 0.7, b = 0.7 },
-            alt_selection_cursor_box_type = 'not-allowed'
+            select = {
+                border_color = {0.7, 0.0, 0.7},
+                cursor_box_type = 'not-allowed',
+                mode = {'nothing'}
+            },
+            alt_select = {
+                border_color = {0.7, 0.0, 0.7},
+                cursor_box_type = 'not-allowed',
+                mode = {'nothing'}
+            },
         },
         {
             type = 'shortcut',
@@ -35,33 +39,10 @@ if not mods['Mower'] and not mods['Dectorio'] then
             associated_control_input = 'rmnmks-remove',
             action = 'spawn-item',
             item_to_spawn = 'rmnmks-remove-tool',
-            icon =
-            {
-                filename = '__remove-nuclear-marks__/graphics/icons/icon-crossed.png',
-                priority = 'extra-high-no-scale',
-                size = 32,
-                scale = 0.5,
-                mipmap_count = 2,
-                flags = {'gui-icon'}
-            },
-            small_icon =
-            {
-                filename = '__remove-nuclear-marks__/graphics/icons/icon-crossed.png',
-                priority = 'extra-high-no-scale',
-                size = 32,
-                scale = 0.5,
-                mipmap_count = 2,
-                flags = {'gui-icon'}
-            },
-            disabled_small_icon =
-            {
-                filename = '__remove-nuclear-marks__/graphics/icons/icon-crossed.png',
-                priority = 'extra-high-no-scale',
-                size = 32,
-                scale = 0.5,
-                mipmap_count = 2,
-                flags = {'gui-icon'}
-            }
+            icon = '__remove-nuclear-marks__/graphics/icons/icon-crossed.png',
+            icon_size = 32,
+            small_icon = '__remove-nuclear-marks__/graphics/icons/icon-crossed.png',
+            small_icon_size = 32,
         }
     }
 end

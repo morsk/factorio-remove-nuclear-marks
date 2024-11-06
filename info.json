@@ -1,11 +1,11 @@
 {
   "name": "remove-nuclear-marks",
   "title": "Remove Nuclear scorch marks",
-  "version": "0.5.1178",
+  "version": "2.0.0",
   "author": "Sil3ntSt0rm",
   "contact": "",
   "homepage": "https://github.com/Sil3ntStorm/factorio-remove-nuclear-marks",
-  "factorio_version": "1.1",
-  "dependencies": ["base >= 1.1", "?Mower >= 0.0.4", "?Dectorio >= 0.12.5"],
+  "factorio_version": "2.0",
+  "dependencies": ["base >= 2.0.0", "?Mower >= 0.0.4", "?Dectorio >= 0.12.5"],
   "description": "Allows to remove explosion craters and marks of nuclear weapon explosions. Extends Dectorios Lawnmower and / or the Mower from the Mower mod. Alternatively provides a shortcut if neither mod is loaded."
 }

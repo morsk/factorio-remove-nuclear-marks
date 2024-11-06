@@ -4,16 +4,18 @@
 
 local nuclearTiles = {
     'nuclear-ground',
-    -- True Nukes
-    'nuclear-deep',
-    'nuclear-high',
-    'nuclear-shallow',
-    'nuclear-crater',
-    'nuclear-crater-fill',
-    'nuclear-crater-shallow-fill',
-    'nuclear-deep-shallow-fill',
-    'nuclear-deep-fill'
 }
+if script.active_mods['True-Nukes'] then
+    -- True Nukes
+    table.insert(nuclearTiles, 'nuclear-deep')
+    table.insert(nuclearTiles, 'nuclear-high')
+    table.insert(nuclearTiles, 'nuclear-shallow')
+    table.insert(nuclearTiles, 'nuclear-crater')
+    table.insert(nuclearTiles, 'nuclear-crater-fill')
+    table.insert(nuclearTiles, 'nuclear-crater-shallow-fill')
+    table.insert(nuclearTiles, 'nuclear-deep-shallow-fill')
+    table.insert(nuclearTiles, 'nuclear-deep-fill')
+end
 
 local function isNuclearTile(tileName)
     for _, v in pairs(nuclearTiles) do
@@ -26,19 +28,21 @@ end
 
 local nuclearEntities = {
     'nuclear-smouldering-smoke-source',
-    -- True Nukes
-    'radiation-cloud-visual-dummy',
-    'radiation-cloud',
-    'lingering-radiation-cloud-visual-dummy',
-    'lingering-radiation-cloud',
-    'thermobaric-wave-fire',
-    'nuclear-fire',
-    'dangerous-radiation-cloud',
-    'medium-scorchmark-tintable',
-    'nuclear-scorchmark',
-    'medium-scorchmark-tintable',
-    'small-scorchmark-tintable'
 }
+if script.active_mods['True-Nukes'] then
+    -- True Nukes
+    table.insert(nuclearEntities, 'radiation-cloud-visual-dummy')
+    table.insert(nuclearEntities, 'radiation-cloud')
+    table.insert(nuclearEntities, 'lingering-radiation-cloud-visual-dummy')
+    table.insert(nuclearEntities, 'lingering-radiation-cloud')
+    table.insert(nuclearEntities, 'thermobaric-wave-fire')
+    table.insert(nuclearEntities, 'nuclear-fire')
+    table.insert(nuclearEntities, 'dangerous-radiation-cloud')
+    table.insert(nuclearEntities, 'medium-scorchmark-tintable')
+    table.insert(nuclearEntities, 'nuclear-scorchmark')
+    table.insert(nuclearEntities, 'medium-scorchmark-tintable')
+    table.insert(nuclearEntities, 'small-scorchmark-tintable')
+end
 
 local biterDecoratives = {
     'enemy-decal',
@@ -51,7 +55,7 @@ local biterDecoratives = {
 local function isNuclearEntity(entityName)
     for _, v in pairs(nuclearEntities) do
         if v == entityName then
-            return True
+            return true
         end
     end
     return false
