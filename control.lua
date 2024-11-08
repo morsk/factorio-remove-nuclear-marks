@@ -2,6 +2,8 @@
 --
 -- Licensed under MS-RL, see https://opensource.org/licenses/MS-RL
 
+local tempSurfaceName = "remove_nuclear_marks"
+
 local nuclearTiles = {
     'nuclear-ground',
 }
@@ -108,6 +110,42 @@ local function getClosestTileName(surface, replacedTiles, rad, pos)
     return result
 end
 
+-- Do not call this without pcall + cleaning up any temporary surface it creates.
+local function fixNuclearTilesInternal(surface, found)
+    local nTiles = {}
+    local tempSurface = game.create_surface(tempSurfaceName, surface.map_gen_settings)
+    -- Mark chunks for generation.
+    for _, tile in pairs(found) do
+        tempSurface.request_to_generate_chunks(tile.position, 0)
+    end
+    -- Force chunk generation.
+    tempSurface.force_generate_chunk_requests()
+    -- Copy tiles from the temp surface.
+    for _, tile in pairs(found) do
+        table.insert(nTiles, {name = tempSurface.get_tile(tile.position).name, position = tile.position})
+    end
+    surface.set_tiles(nTiles)
+end
+
+-- Wrapper to call fixNuclearTilesInternal only with pcall + cleanup.
+local function fixNuclearTiles(...)
+    -- We use, then delete a surface with this name, so there had better not be one already.
+    if game.get_surface(tempSurfaceName) then
+        game.print("Can't create our temp surface '"..tempSurfaceName.."' as it already exists. This is probably a bug.", { skip = defines.print_skip.never })
+        return
+    end
+    -- pcall because we have cleanup to do even if this breaks
+    local ok, result = pcall(fixNuclearTilesInternal, ...)
+    -- cleanup
+    if game.get_surface(tempSurfaceName) then
+        game.delete_surface(tempSurfaceName)
+    end
+    -- print any errors
+    if not ok then
+        game.print(result, { skip = defines.print_skip.never })
+    end
+end
+
 local function onSelection(data)
     local run = false
     if script.active_mods['Mower'] ~= nil and data.item == 'mower-mower' then
@@ -137,12 +175,7 @@ local function onSelection(data)
     data.surface.destroy_decoratives{area = data.area, name = 'nuclear-ground-patch'}
     local found = data.surface.find_tiles_filtered{area = data.area, name = nuclearTiles}
     if #found > 0 then
-        local nTiles = {}
-        local tiles = data.surface.find_tiles_filtered{area = data.area}
-        for _, tile in pairs(found) do
-            table.insert(nTiles, {name = getClosestTileName(data.surface, nTiles, 30, tile.position), position = tile.position})
-        end
-        data.surface.set_tiles(nTiles)
+        fixNuclearTiles(data.surface, found)
     end
     found = data.surface.find_entities_filtered{area = data.area, name = nuclearEntities}
     for _, ent in pairs(found) do
